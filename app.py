@@ -4,6 +4,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time as sl
 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 service_obj = Service("D:/chromedriver/chromedriver")
 driver = webdriver.Chrome(service=service_obj)
 driver.implicitly_wait(5)
@@ -20,6 +23,14 @@ for result in results:
     
 driver.find_element(By.CSS_SELECTOR, "img[alt='Cart']").click()
 driver.find_element(By.XPATH, "//button[text()='PROCEED TO CHECKOUT']").click()
-sl.sleep(10)
+
 driver.find_element(By.CSS_SELECTOR, ".promoCode").send_keys("rahulshettyacademy")
 driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]").click()
+
+wait = WebDriverWait(driver,10)
+wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".promoinfo")))
+promoInfo = driver.find_element(By.CLASS_NAME, "promoInfo").text
+
+assert promoInfo == "Code applied ..!"
+print("passed")
+
