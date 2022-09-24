@@ -6,11 +6,12 @@ import time as sl
 
 service_obj = Service("D:/chromedriver/chromedriver")
 driver = webdriver.Chrome(service=service_obj)
+driver.implicitly_wait(5)
 
 driver.maximize_window()
 driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
 driver.find_element(By.CSS_SELECTOR, value="input[type='search']").send_keys('ber')
-sl.sleep(7)
+sl.sleep(4)
 results = driver.find_elements(By.XPATH, "//div[@class='products']/div")
 count = len(results)
 assert count > 0
@@ -19,5 +20,6 @@ for result in results:
     
 driver.find_element(By.CSS_SELECTOR, "img[alt='Cart']").click()
 driver.find_element(By.XPATH, "//button[text()='PROCEED TO CHECKOUT']").click()
+sl.sleep(10)
 driver.find_element(By.CSS_SELECTOR, ".promoCode").send_keys("rahulshettyacademy")
 driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]").click()
