@@ -19,3 +19,5 @@ for result in results:
     
 driver.find_element(By.CSS_SELECTOR, "img[alt='Cart']").click()
 driver.find_element(By.XPATH, "//button[text()='PROCEED TO CHECKOUT']").click()
+driver.find_element(By.CSS_SELECTOR, ".promoCode").send_keys("rahulshettyacademy")
+driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]").click()
