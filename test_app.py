@@ -37,6 +37,12 @@ totalAmount = int(driver.find_element(By.CLASS_NAME, 'totAmt').text)
 assert sum == totalAmount
 print(f"promoCode: {sum} is equal to totalSum: {totalAmount}")
 
+# Discount amount
+DiscountAmount = int(driver.find_element(By.CLASS_NAME, 'discountAmt').text)
+print(DiscountAmount)
+assert DiscountAmount < totalAmount
+print("Shetty Coupon works")
+
 driver.find_element(By.CSS_SELECTOR, ".promoCode").send_keys("rahulshettyacademy")
 driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]").click()
 
