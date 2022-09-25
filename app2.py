@@ -24,6 +24,19 @@ for result in results:
 driver.find_element(By.CSS_SELECTOR, "img[alt='Cart']").click()
 driver.find_element(By.XPATH, "//button[text()='PROCEED TO CHECKOUT']").click()
 
+# Sum Validation
+prices = driver.find_elements(By.CSS_SELECTOR, "tr td:nth-child(5) p")
+sum = 0
+for price in prices:
+    sum +=int(price.text)
+
+print(sum)
+
+# Check against the promo code we have 
+totalAmount = int(driver.find_element(By.CLASS_NAME, 'totAmt').text)
+assert sum == totalAmount
+print(f"promoCode: {sum} is equal to totalSum: {totalAmount}")
+
 driver.find_element(By.CSS_SELECTOR, ".promoCode").send_keys("rahulshettyacademy")
 driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]").click()
 
